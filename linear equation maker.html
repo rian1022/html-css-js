@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>일차방정식 생성기</title>
+    <style>
+      #number-input{
+        width: 295px;
+        margin: 30px 0 0 40%;
+      }
+      #lb1{
+        font-family: 'KIMM_Bold';
+        margin: 10px 0 0 40%;
+        color: white;
+      }
+      body{
+        background-color: rgb(78, 78, 78);
+      }
+      p {
+        color: white;
+        margin: 10px 0 0 40%;
+      }
+      @font-face {
+        font-family: 'KIMM_Bold';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KIMM_Bold.woff2') format('woff2');
+        font-weight: 700;
+        font-style: normal;
+      }
+      #inputs{
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="inputs">
+
+    </div>
+    <label id="lb1" for="number-input">만들 식의 개수를 입력하세요.</label>
+    <br>
+    <input type="number" id="number-input" placeholder="10을 입력하면 10개의 방정식이 만들어집니다." />
+    <button onclick="saveNumber()">만들기</button>
+    <br>
+
+    <script>
+        let i = 0;
+
+        const AllMulArr = [0.01, 0.1, 0.1, 1, 1, 1, 1, 1, 1, 10, 10, 100];
+        AllMul = AllMulArr[Math.floor(Math.random() * 12) + 1];
+
+        const XValueArr = [];
+        for (i = -20; i <= 20; i++) {
+            if(i == 0){
+              continue;
+            }
+            XValueArr.push(i);
+        }
+
+        const XMulArr = [];
+        for (i = -17; i <= 17; i++) {
+            if (i == 0){
+              continue;
+            }
+            XMulArr.push(i);
+        }
+
+        const PlusNumArr = [];
+        for (i = -25; i <= 25; i++) {
+            PlusNumArr.push(i);
+        }
+
+
+        //함수
+
+
+        function saveNumber() {
+          const numberInput = document.getElementById("number-input");
+          const inputValue = numberInput.value;
+
+          if (!isNaN(inputValue)) {
+            savedNumber = parseInt(inputValue);
+          } 
+          else {
+            console.error("숫자를 입력하세요.");
+          }
+          document.write('<div id="ganeratebutton"><button id="gnrbutton" onclick="generateRandomValue()">방정식 만들기</button><br><p id="random-value"></p></div><br><style>body{background-color: rgb(78, 78, 78);}#gnrbutton{width:170px;height:60px;margin:0 0 0 40%}</style>');
+        }
+
+        function generateRandomValue() {
+          x = prompt('사용할 미지수를 입력해주세요.');
+          var iisNaN = 0;
+          let j;
+
+          AllMul = AllMulArr[Math.floor(Math.random() * 12)];
+
+          for(j = 0; j < savedNumber; j++){
+
+            //변수 설정
+            AllMul = AllMulArr[Math.floor(Math.random() * 12)];
+            XValue = XValueArr[Math.floor(Math.random() * 40)];
+            XMul = XMulArr[Math.floor(Math.random() * 34)] * AllMul;
+            PlusNum = PlusNumArr[Math.floor(Math.random() * 50)] * AllMul;
+            Num = XValue * XMul + PlusNum;
+
+            //방정식 출력
+            if(AllMul === 0.01 || AllMul === 0.1){
+
+              if(PlusNum == 0){
+                document.write('<p>' + XMul.toFixed(2) + x + '=' + (XValue * XMul).toFixed(2) + '<br><br><br>' + '</p><style>p{color: white;margin: 10px 0 0 40%;}</style>');
+              }
+
+              else if(PlusNum != 0){
+
+                if(PlusNum > 0){
+                  document.write('<p>' + XMul.toFixed(2) + x + '+' + PlusNum.toFixed(2) + '=' + Num.toFixed(2) + '<br><br><br>' + '</p><style>p{color: white;margin: 10px 0 0 40%;}</style>');
+                }
+
+                else if(PlusNum < 0){
+                  document.write('<p>' + XMul.toFixed(2) + x + PlusNum.toFixed(2) + '=' + Num.toFixed(2) + '<br><br><br>' + '</p><style>p{color: white;margin: 10px 0 0 40%;}</style>');
+                }
+
+              }
+
+            }
+            else {
+              if(PlusNum == 0){
+                document.write('<p>' + XMul + x + '=' + (XValue * XMul) + '<br><br><br>' + '</p><style>p{color: white;margin: 10px 0 0 40%;}</style>');
+              }
+
+              else if(PlusNum != 0){
+
+                if(PlusNum > 0){
+                  document.write('<p>' + XMul + x + '+' + PlusNum + '=' + Num + '<br><br><br>' + '</p><style>p{color: white;margin: 10px 0 0 40%;}</style>');
+                }
+
+                else if(PlusNum < 0){
+                  document.write('<p>' + XMul + x + PlusNum + '=' + Num + '<br><br><br>' + '</p><style>p{color: white;margin: 10px 0 0 40%;}</style>');
+                }
+              }
+            }
+          }
+        }   
+    </script>
+  </body>
+</html>
